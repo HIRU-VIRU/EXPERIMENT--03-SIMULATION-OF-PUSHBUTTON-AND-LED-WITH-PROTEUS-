@@ -1,5 +1,5 @@
-# EXPERIMENT--03-SIMULATION-OF-PUSHBUTTON-AND-LED INTERFACE WITH ARM CONTROLLER AND PROTEUS 
-## Aim: To Interface a Digital output (LED) and Digital input (Pushbutton) to ARM development board , and simulate it in Proteus 
+# EXPERIMENT 03 SIMULATION OF PUSHBUTTON AND LED INTERFACE WITH ARM CONTROLLER AND PROTEUS 
+## Aim : To Interface a Digital output (LED) and Digital input (Pushbutton) to ARM development board , and simulate it in Proteus 
 ## Components required: STM32 CUBE IDE, Proteus 8 simulator .
 ## Theory 
 The full form of an ARM is an advanced reduced instruction set computer (RISC) machine, and it is a 32-bit processor architecture expanded by ARM holdings. The applications of an ARM processor include several microcontrollers as well as processors. The architecture of an ARM processor was licensed by many corporations for designing ARM processor-based SoC products and CPUs. This allows the corporations to manufacture their products using ARM architecture. Likewise, all main semiconductor companies will make ARM-based SOCs such as Samsung, Atmel, TI etc.
@@ -71,18 +71,47 @@ We are now at the last part of step by step guide on how to simulate STM32 proje
 
 
 ## STM 32 CUBE PROGRAM :
+`````
 
-
-
-
+#include "main.h"
+#include <stdbool.h>
+void push_button();
+bool button_status;
+int main(void)
+{
+   HAL_Init();
+   System clock_config();
+   MX_GPIO_Init();
+   while (1)
+   {
+	      push_button();
+   }
+void push_button(){
+	button_status=HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_13);
+	if(button_status==0)
+	{
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);
+		
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+	
+	}
+	else
+	{
+		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+	}
+}
+````````
 ## Output screen shots of proteus  :
 
+![1](https://github.com/user-attachments/assets/44ca50b7-5d6a-4f22-a774-1d856d4db26c)
 
+![2](https://github.com/user-attachments/assets/f6f9e003-a8a2-4021-ad83-e14d74c8bc1a)
 
 
 ## Proteus layout(Add pdf screen shot of circuit here)
  
- 
+ ![layout](https://github.com/user-attachments/assets/1ffe18f0-91d1-4f91-9d2c-0281c864bc33)
+
  
  
 ## Result :
